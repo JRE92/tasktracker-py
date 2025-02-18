@@ -1,5 +1,4 @@
-import json
-import os
+import json, os
 
 def add_task(task, status):
     print("Add task")
