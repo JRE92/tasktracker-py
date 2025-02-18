@@ -15,7 +15,7 @@ TaskTracker is a simple and efficient task management application written in Pyt
 To install TaskTracker, clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/yourusername/tasktracker.git
+git clone https://github.com/JRE92/tasktracker-py.git
 cd tasktracker
 pip3 install -r requirements.txt
 ```
