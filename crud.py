@@ -1,11 +1,9 @@
 import json
 import os
 
-def add_task():
+def add_task(task, status):
     print("Add task")
-    task = input("Enter task: ")
     while True:
-        status = input("Enter status (todo/done/inprogress): ")
         if status == "todo" or "done" or "inprogress":
             break
         else:
@@ -24,46 +22,44 @@ def add_task():
     with open("tasks.json", "w") as f:
         json.dump(tasks, f, indent=4)
     f.close()
-def view_tasks():
-    print("View tasks")
+def view_tasks(status):
+    data = []
     if not os.path.exists("tasks.json"):
         print("No tasks available")
         return
     else:
         with open("tasks.json", "r") as f:
-            data = json.load(f)
+            file = json.load(f)
         while True:
-            status = input("Enter status (todo/done/inprogress): ")
             if status == "todo":
-                for x in data:
+                for x in file:
                     if x["status"] == "todo":
-                        print(f"ID: {x['ID']}, Task: {x['name']}, Status: {x['status']}")
+                        data.append(x)
                 break
             if status == "done":
-                for x in data:
+                for x in file:
                     if x["status"] == "done":
-                        print(f"ID: {x['ID']}, Task: {x['name']}, Status: {x['status']}")
+                        data.append(x)
                 break
             if status == "inprogress":
-                for x in data:
+                for x in file:
                     if x["status"] == "inprogress":
-                        print(f"ID: {x['ID']}, Task: {x['name']}, Status: {x['status']}")
+                        data.append(x)
                 break
             else:
                 print("Invalid status")            
     f.close()
-def update_tasks():
+    return data
+def update_tasks(input_id, new_status):
     print("Update tasks")
     if not os.path.exists("tasks.json"):
         print("No tasks available")
         return
     else:
-        input_id = int(input("Enter ID: "))
         with open("tasks.json", "r") as f:
             data = json.load(f)
         for x in data:
             if x["ID"] == input_id:
-                new_status = input("Enter new status (todo/done/inprogress): ")
                 x["status"] = new_status
                 with open("tasks.json", "w") as f:
                     json.dump(data, f, indent=4)
@@ -72,13 +68,12 @@ def update_tasks():
         print("Invalid ID")
         f.close()
         return
-def delete_tasks():
+def delete_tasks(input_id):
     print("Delete tasks")
     if not os.path.exists("tasks.json"):
         print("No tasks available")
         return
     else:
-        input_id = int(input("Enter ID: "))
         with open("tasks.json", "r") as f:
             data = json.load(f)
         for x in data:

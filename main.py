@@ -1,23 +1,30 @@
 from crud import *
-def print_menu():
-    print("1. Add task")
-    print("2. View tasks")
-    print("3. Update tasks")
-    print("4. Delete tasks")
-    print("5. Exit")
+from views import *
+
+def main():
+    print_menu()
     while True:
         choice = input("Enter your choice: ")
         if choice == "1":
-            add_task()
+            task = input("Enter task: ")
+            status = input("Enter status (todo/done/inprogress): ")
+            add_task(task, status)
         elif choice == "2":
-            view_tasks()
+            status = input("Enter status (todo/done/inprogress): ")
+            data = view_tasks(status)
+            show_tasks(data)
         elif choice == "3":
-            update_tasks()
+            input_id = int(input("Enter ID: "))
+            new_status = input("Enter new status (todo/done/inprogress): ")
+            update_tasks(input_id, new_status)
         elif choice == "4":
-            delete_tasks()
+            input_id = int(input("Enter ID: "))
+            delete_tasks(input_id)
         elif choice == "0":
             print("Exiting...")
             break
         else:
             print("Invalid choice")
-print_menu()
+
+if __name__ == "__main__":  
+    main()  # Call the main function    
