@@ -25,7 +25,7 @@ pip3 install -r requirements.txt
 To start using TaskTracker, run the following command:
 
 ```bash
-python3 tasktracker.py
+python3 main.py
 ```
 
 ## Contributing
